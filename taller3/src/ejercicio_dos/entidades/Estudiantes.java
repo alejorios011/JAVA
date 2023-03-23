@@ -15,11 +15,11 @@ public class Estudiantes extends Materias {
     @Override
     public void consultarMaterias(int id) throws NoInscritoException {
         if (id == getIdEstudiante()){
-            System.out.println("El alumno esta inscrito en: " + getNombreMateria());
             System.out.println("Id del alumno: " + getIdEstudiante());
             System.out.println("Nombre del alumno: " + getNombreEstudiante());
+            System.out.println("El alumno esta inscrito en: " + getNombreMateria());
         } else {
-            throw new NoInscritoException("El alumno no esta inscrito");
+            throw new NoInscritoException("El alumno " + getNombreEstudiante() + " no esta inscrito");
         }
     }
 }
