@@ -1,3 +1,6 @@
+import ejercicio_cuatro.abstracta.Cuenta;
+import ejercicio_cuatro.entidades.CuentaAhorros;
+import ejercicio_cuatro.entidades.CuentaCorriente;
 import ejercicio_dos.abstractas.Materias;
 import ejercicio_dos.entidades.Estudiantes;
 import ejercicio_tres.entidades.ReproductorMp3;
@@ -5,6 +8,8 @@ import ejercicio_tres.entidades.ReproductorMp4;
 import ejercicio_tres.entidades.ReproductorWav;
 import ejercicio_uno.Boleta;
 import ejercicio_uno.Cine;
+import excepciones.FondoInsuficienteException;
+import excepciones.LimiteDeRetiroException;
 import excepciones.NoInscritoException;
 import excepciones.SinRecursoException;
 
@@ -19,7 +24,9 @@ public class main {
         // Probando segundo ejercicio
         // segundoEjercicio();
         // Probando tercer ejercicio
-        tercerEjercicio();
+        // tercerEjercicio();
+        // Probando cuarto ejercicio
+        cuartoEjercicio();
     }
 
     // Para que quede más organizado crearé una función para cada ejercicio
@@ -84,5 +91,56 @@ public class main {
         mp3.reproducirMusica();
         wav.reproducirMusica();
         mp4.reproducirMusica();
+    }
+
+    public static void cuartoEjercicio(){
+        // Probemos el ejercicio
+        Cuenta ahorros = new CuentaAhorros(1020, 0, "Andres");
+        Cuenta corriente = new CuentaCorriente(335, 30000, "Camila");
+
+        // Probaremos un poco algunas funciones... empezemos con la cuenta de ahorros
+        try {
+            // Por supuesto nos lanza la excepción debido a fondos insuficientes
+            // ahorros.retirar(10000);
+            // corriente.retirar(50000);
+
+            /**
+             * Si lo hacemos de esta forma tendra de donde retirar dinero
+              */
+            ahorros.depositar(30000);
+            ahorros.retirar(10000);
+
+            corriente.depositar(20000);
+            corriente.retirar(18000);
+
+            /**
+             * Probemos ahora el número de retiros y depositos, usaremos un for para cada uno para visualizarlo mejor
+             */
+            for (int i=0; i < 6; i++){
+                ahorros.depositar(30000);
+                corriente.depositar(15000);
+            }
+
+            for(int j = 0; j < 6; j++){
+                ahorros.retirar(15000);
+                corriente.retirar(12000);
+            }
+            // PD: Como no coloque un mensaje que me diga cuanto se cobra o se adiciona extra, hay que fijarse en los valores.
+        } catch (FondoInsuficienteException e){
+            System.out.println(e.getMessage());
+        } catch (LimiteDeRetiroException e){
+            System.out.println(e.getMessage());
+        }
+
+        /*
+        // Mostraremos los datos de ambas cuentas en pantalla, por lo que haremos una lista
+        List<Cuenta> cuentas = new ArrayList<Cuenta>();
+        cuentas.add(ahorros);
+        cuentas.add(corriente);
+        // Recorremos la lista
+        for (Cuenta cuenta: cuentas) {
+            cuenta.imprimir();
+        }
+         */
     }
 }
