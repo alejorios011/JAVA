@@ -59,12 +59,35 @@ public class BancoBaseDatos implements Banco {
             // Preparamos el Statement para poder ejecutar la sentencia SQL
             Statement sentencia = conexion.createStatement();
             sentencia.execute(sql);
-            // Enviemos un mensaje por consola que nos confime que se creo la cuenta exitosamente
-            System.out.println("La cuenta ha sido creada con exito!");
         } catch (SQLException e) {
             System.out.println("Error de conexión: " + e);
         } catch (Exception e) {
             System.err.println("Error: " + e);
+        }
+    }
+
+    @Override
+    public void actualizarCuenta(int numeroCuenta, String nombreProp, String tipo) {
+        try(Connection conexion = DriverManager.getConnection(cadenaConexion)){
+            // Unicamente permitiremos que modifique el nombre del propietario y el tipo de cuenta
+            String sql = "UPDATE cuentas " +
+                    "SET nombre_propietario= '" + nombreProp + "', tipo= '" + tipo + "' " +
+                    "WHERE numero_cuenta=" + numeroCuenta + ";";
+            Statement sentencia = conexion.createStatement();
+            sentencia.execute(sql);
+        } catch (SQLException e) {
+            System.out.println("Error de conexión: " + e);
+        }
+    }
+
+    @Override
+    public void eliminarCuenta(int numeroCuenta) {
+        try(Connection conexion = DriverManager.getConnection(cadenaConexion)){
+            String sql = "DELETE FROM cuentas WHERE numero_cuenta = " + numeroCuenta + ";";
+            Statement sentencia = conexion.createStatement();
+            sentencia.execute(sql);
+        } catch (SQLException e) {
+            System.out.println("Error de conexión: " + e);
         }
     }
 
@@ -139,25 +162,5 @@ public class BancoBaseDatos implements Banco {
             System.out.println("Por favor ingrese el número de cuenta con números: " + e.getMessage());
         }
         return null;
-    }
-
-    @Override
-    public void actualizarCuenta(int numeroCuenta) {
-        try(Connection conexion = DriverManager.getConnection(cadenaConexion)){
-            String sql = "";
-        } catch (SQLException e) {
-            System.out.println("Error de conexión: " + e);
-        }
-    }
-
-    @Override
-    public void eliminarCuenta(int numeroCuenta) {
-        try(Connection conexion = DriverManager.getConnection(cadenaConexion)){
-            String sql = "DELETE FROM cuentas WHERE numero_cuenta = " + numeroCuenta + ";";
-            Statement sentencia = conexion.createStatement();
-            sentencia.execute(sql);
-        } catch (SQLException e) {
-            System.out.println("Error de conexión: " + e);
-        }
     }
 }

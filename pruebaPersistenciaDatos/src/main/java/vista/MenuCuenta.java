@@ -1,6 +1,7 @@
 package vista;
 
 import controlador.ControladorCuenta;
+import excepciones.CampoVacioException;
 import modelo.Cuenta;
 
 import java.util.List;
@@ -46,6 +47,7 @@ public class MenuCuenta {
                 buscarCuenta();
                 break;
             case 4:
+                actualizarCuenta();
                 break;
             case 5:
                 eliminarCuenta();
@@ -85,6 +87,8 @@ public class MenuCuenta {
         // Pasamos la nueva cuenta al controlador
         try{
             controladorCuenta.crearCuenta(nuevaCuenta);
+            // Enviemos un mensaje por consola que nos confime que se creo la cuenta exitosamente
+            System.out.println("La cuenta ha sido creada con exito!");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -118,6 +122,32 @@ public class MenuCuenta {
             System.out.println("Número de cuenta: " + cuentaEncontrada.getNumero_cuenta());
             System.out.println("Propietario: " + cuentaEncontrada.getNombre_propietario());
             System.out.println("Tipo de cuenta: " + cuentaEncontrada.getTipo());
+            System.out.println("Saldo cuenta: " + cuentaEncontrada.getSaldo());
+            // Dejaremos unas lineas que sirvan para separar estos datos del resto del menu
+            System.out.println("-----------------");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void actualizarCuenta(){
+        System.out.println("Actualizando cuenta");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Por favor ingrese el numero de la cuenta");
+        int numCuenta = scanner.nextInt();
+        // Mandamos el nextline solo para evitar el error que se presento en el crearCuenta()
+        scanner.nextLine();
+        System.out.println("Ingrese el nuevo nombre del propietario");
+        String nombreProp = scanner.nextLine();
+        System.out.println("Ingrese el nuevo tipo de cuenta");
+        String tipo = scanner.nextLine();
+
+        try {
+            controladorCuenta.actualizarCuenta(numCuenta, nombreProp, tipo);
+            // Mostramos un mensaje que nos informe el exito del proceso
+            System.out.println("Datos actualizados");
+        } catch (CampoVacioException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

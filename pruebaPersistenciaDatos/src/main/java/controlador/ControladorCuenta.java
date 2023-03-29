@@ -1,5 +1,6 @@
 package controlador;
 
+import excepciones.CampoVacioException;
 import modelo.BancoBaseDatos;
 import modelo.Cuenta;
 
@@ -23,6 +24,19 @@ public class ControladorCuenta {
         }
     }
 
+    public void actualizarCuenta(int numCuenta, String nombreProp, String tipo) throws CampoVacioException {
+        // Validemos que el nombre y el tipo no lleguen vacios
+        if (nombreProp != null && tipo != null){
+            bancoBaseDatos.actualizarCuenta(numCuenta, nombreProp, tipo);
+        } else {
+            throw new CampoVacioException("Datos faltantes, por favor llene todos los campos solicitados");
+        }
+    }
+
+    public void eliminarCuenta(int numCuenta){
+        bancoBaseDatos.eliminarCuenta(numCuenta);
+    }
+
     public List<Cuenta> listarCuentas(){
         return (List<Cuenta>) bancoBaseDatos.listarCuentas();
     }
@@ -34,9 +48,5 @@ public class ControladorCuenta {
         } else {
             return (Cuenta) cuenta;
         }
-    }
-
-    public void eliminarCuenta(int numCuenta){
-        bancoBaseDatos.eliminarCuenta(numCuenta);
     }
 }
