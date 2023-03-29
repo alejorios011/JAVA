@@ -13,4 +13,10 @@ public interface Banco {
 
     public Object buscarCuenta(int numeroCuenta);
 
+    public void depositar(double monto, Object objeto);
+
+    public void retirar(double monto);
+
+    public void transaccion(double monto);
+
 }

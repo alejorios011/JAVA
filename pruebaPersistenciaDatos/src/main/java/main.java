@@ -1,9 +1,9 @@
-import vista.MenuCuenta;
+import vista.MenuApp;
 
 public class main {
     public static void main(String[] args) {
         // Instanciamos la vista e inicializamos la App
-        MenuCuenta app = new MenuCuenta();
+        MenuApp app = new MenuApp();
         app.iniciarApp();
     }
 }

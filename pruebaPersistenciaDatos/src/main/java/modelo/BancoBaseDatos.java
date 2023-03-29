@@ -163,4 +163,59 @@ public class BancoBaseDatos implements Banco {
         }
         return null;
     }
+
+    // Update especifico para actualizar el saldo
+    public void actualizarSaldo(Object objeto){
+        try(Connection conexion = DriverManager.getConnection(cadenaConexion)){
+            // Haremos un parseo al objeto recibido
+            Cuenta cuentaUsuario = (Cuenta) objeto;
+            String sql = "UPDATE cuentas " + "SET saldo = " + cuentaUsuario.getSaldo() + ", " +
+                    "cantidad_retiro =  " + cuentaUsuario.getCantidad_retiro() + ", " +
+                    "cantidad_deposito = " + cuentaUsuario.getCantidad_deposito() + " " +
+                    "WHERE numero_cuenta = " + cuentaUsuario.getNumero_cuenta() + ";";
+            Statement sentencia = conexion.createStatement();
+            sentencia.execute(sql);
+        } catch (SQLException e) {
+            System.out.println("Error de conexión: " + e);
+        }
+    }
+
+    @Override
+    public void depositar(double monto, Object objeto) {
+        Cuenta cuentaUsuario = (Cuenta) objeto;
+        // Validamos la cantidad de depositos para darle el beneficio
+        if (cuentaUsuario.getCantidad_deposito() < 2) {
+            // Se adiciona un 0.5% más del valor depositado
+            double porcentaje = (monto*0.5)/100;
+            // Actualizamos el valor del monto
+            monto = monto+porcentaje;
+            // Y se hace el deposito
+            cuentaUsuario.setSaldo(cuentaUsuario.getSaldo() + monto);
+            // Se aumenta el número de depositos en la cuenta
+            cuentaUsuario.setCantidad_deposito(cuentaUsuario.getCantidad_deposito()+1);
+
+            // Con los datos ya actualizados de la cuentaUsuario le pasamos el objeto a la funcion de actualizarSaldo()
+            actualizarSaldo(cuentaUsuario);
+            // Mostramos la cantidad depositada en pantalla
+            System.out.println("¡Transacción exitosa! Ha depositado: " + monto);
+        } else {
+            // Se hace el deposito normal
+            cuentaUsuario.setSaldo(cuentaUsuario.getSaldo() + monto);
+            // Se aumenta el número de depositos en la cuenta
+            cuentaUsuario.setCantidad_deposito(cuentaUsuario.getCantidad_deposito()+1);
+
+            // Mostramos la cantidad depositada en pantalla
+            System.out.println("¡Transacción exitosa! Ha depositado: " + monto);
+        }
+    }
+
+    @Override
+    public void retirar(double monto) {
+
+    }
+
+    @Override
+    public void transaccion(double monto) {
+
+    }
 }

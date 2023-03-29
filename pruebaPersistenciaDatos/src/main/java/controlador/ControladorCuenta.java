@@ -49,4 +49,13 @@ public class ControladorCuenta {
             return (Cuenta) cuenta;
         }
     }
+
+    public void depositar(double monto, Object objeto) throws Exception {
+        // Solicitemos que el valor del deposito sea mayor a 10000
+        if (monto > 10000) {
+            bancoBaseDatos.depositar(monto, objeto);
+        } else {
+            throw new Exception("El valor minimo del deposito es de 10000");
+        }
+    }
 }
