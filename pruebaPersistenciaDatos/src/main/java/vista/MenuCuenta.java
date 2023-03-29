@@ -40,6 +40,7 @@ public class MenuCuenta {
     public void opcionInterfaz(int opcion){
         switch (opcion) {
             case 1:
+                retirar();
                 break;
             case 2:
                 depositar();
@@ -52,6 +53,18 @@ public class MenuCuenta {
             case 5:
                 salir();
                 break;
+        }
+    }
+
+    public void retirar(){
+        System.out.println("RETIRAR SALDO");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el valor a retirar");
+        double retiro = scanner.nextDouble();
+        try {
+            controladorCuenta.retirar(retiro, cuentaUsuario);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

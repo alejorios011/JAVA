@@ -58,4 +58,13 @@ public class ControladorCuenta {
             throw new Exception("El valor minimo del deposito es de 10000");
         }
     }
+
+    public void retirar(double monto, Object objeto) throws Exception {
+        // Solicitemos que el valor del retiro sea mayor a 10000
+        if (monto > 10000){
+            bancoBaseDatos.retirar(monto, objeto);
+        } else {
+            throw new Exception("El valor minimo de retiro es de 10000");
+        }
+    }
 }
