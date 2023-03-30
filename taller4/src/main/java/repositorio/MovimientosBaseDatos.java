@@ -255,14 +255,4 @@ public class MovimientosBaseDatos implements Movimientos {
             throw new Exception("Tipo de cuenta no valido");
         }
     }
-
-    public boolean validarSaldo(double saldoRetiro, double saldoDisponible){
-        if (saldoRetiro > saldoDisponible){
-            // No se puede hacer la transaccion
-            return false;
-        } else {
-            // Si se puede hacer la transacción
-            return true;
-        }
-    }
 }
