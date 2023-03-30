@@ -1,16 +1,16 @@
-package controlador;
+package servicios;
 
 import excepciones.CampoVacioException;
-import modelo.BancoBaseDatos;
-import modelo.Cuenta;
+import repositorio.BancoBaseDatos;
+import entidades.Cuenta;
 
 import java.util.List;
 
-public class ControladorCuenta {
+public class ServiciosCuenta {
     // Agregamos como atributo la clase que tiene la conexion a la base de datos
     private BancoBaseDatos bancoBaseDatos;
 
-    public ControladorCuenta() {
+    public ServiciosCuenta() {
         // La inicializamos en el contructor
         bancoBaseDatos = new BancoBaseDatos();
     }

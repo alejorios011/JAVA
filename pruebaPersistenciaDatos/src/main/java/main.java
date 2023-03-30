@@ -1,9 +1,9 @@
-import vista.MenuApp;
+import controlador.ControladorMenuApp;
 
 public class main {
     public static void main(String[] args) {
         // Instanciamos la vista e inicializamos la App
-        MenuApp app = new MenuApp();
+        ControladorMenuApp app = new ControladorMenuApp();
         app.iniciarApp();
     }
 }

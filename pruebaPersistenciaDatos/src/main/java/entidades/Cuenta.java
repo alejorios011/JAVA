@@ -1,4 +1,4 @@
-package modelo;
+package entidades;
 
 public class Cuenta {
     private int numero_cuenta;

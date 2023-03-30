@@ -1,5 +1,6 @@
-package modelo;
+package repositorio;
 
+import entidades.Cuenta;
 import excepciones.FondoInsuficienteException;
 import excepciones.LimiteDeRetiroException;
 

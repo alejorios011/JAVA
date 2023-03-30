@@ -1,20 +1,20 @@
-package vista;
+package controlador;
 
-import controlador.ControladorCuenta;
-import modelo.Cuenta;
+import servicios.ServiciosCuenta;
+import entidades.Cuenta;
 
 import java.util.Scanner;
 
-public class MenuCuenta {
+public class ControladorMenuCuenta {
     private boolean iniciar = false;
     // Crearemos un atributo de tipo Cuenta, para guardar los datos que nos envien ahí
     Cuenta cuentaUsuario;
-    private ControladorCuenta controladorCuenta;
-    // private MenuApp menuApp;
+    private ServiciosCuenta serviciosCuenta;
+    // private ControladorMenuApp menuApp;
 
 
-    public MenuCuenta(Cuenta cuentaUsuario, boolean iniciar) {
-        controladorCuenta = new ControladorCuenta();
+    public ControladorMenuCuenta(Cuenta cuentaUsuario, boolean iniciar) {
+        serviciosCuenta = new ServiciosCuenta();
         this.cuentaUsuario = cuentaUsuario;
         this.iniciar = iniciar;
     }
@@ -62,7 +62,7 @@ public class MenuCuenta {
         System.out.println("Ingrese el valor a retirar");
         double retiro = scanner.nextDouble();
         try {
-            controladorCuenta.retirar(retiro, cuentaUsuario);
+            serviciosCuenta.retirar(retiro, cuentaUsuario);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -76,7 +76,7 @@ public class MenuCuenta {
         double deposito = scanner.nextDouble();
         // Llamamos el método para hacer el deposito
         try {
-            controladorCuenta.depositar(deposito, cuentaUsuario);
+            serviciosCuenta.depositar(deposito, cuentaUsuario);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

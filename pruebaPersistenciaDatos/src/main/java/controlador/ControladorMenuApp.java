@@ -1,18 +1,18 @@
-package vista;
+package controlador;
 
-import controlador.ControladorCuenta;
+import servicios.ServiciosCuenta;
 import excepciones.CampoVacioException;
-import modelo.Cuenta;
+import entidades.Cuenta;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class MenuApp {
+public class ControladorMenuApp {
     private boolean encendido = true;
-    private ControladorCuenta controladorCuenta;
+    private ServiciosCuenta serviciosCuenta;
 
-    public MenuApp() {
-        controladorCuenta = new ControladorCuenta();
+    public ControladorMenuApp() {
+        serviciosCuenta = new ServiciosCuenta();
     }
 
     // Creamos la función que muestre en pantalla las opciones del menu
@@ -86,7 +86,7 @@ public class MenuApp {
         Cuenta nuevaCuenta = new Cuenta(numCuenta, nomPropietario, saldo, tipo, cantRetiros, cantDepositos);
         // Pasamos la nueva cuenta al controlador
         try{
-            controladorCuenta.crearCuenta(nuevaCuenta);
+            serviciosCuenta.crearCuenta(nuevaCuenta);
             // Enviemos un mensaje por consola que nos confime que se creo la cuenta exitosamente
             System.out.println("La cuenta ha sido creada con exito!");
         } catch (Exception e) {
@@ -96,7 +96,7 @@ public class MenuApp {
 
     private void listarCuentas(){
         System.out.println("Listando cuentas...");
-        List<Cuenta> cuentasBaseDatos = controladorCuenta.listarCuentas();
+        List<Cuenta> cuentasBaseDatos = serviciosCuenta.listarCuentas();
 
         for (Cuenta cuentaBD : cuentasBaseDatos) {
             // Solo mostraremos el número de cuenta, el nombre del propietario y el tipo de cuenta que es.
@@ -116,7 +116,7 @@ public class MenuApp {
         // Le pasamos el numero de cuenta al controlador
         try {
             // Recibimos en un objeto de tipo cuenta los datos encontrados
-            Cuenta cuentaEncontrada = controladorCuenta.buscarCuenta(numCuenta);
+            Cuenta cuentaEncontrada = serviciosCuenta.buscarCuenta(numCuenta);
 
             /**
              * Haremos una modificación al código según lo solicitado en el ejercicio
@@ -134,8 +134,8 @@ public class MenuApp {
             */
 
             // Pasamos el objeto "cuentaEncontrada" a la clase que maneja el proximo Menu de opciones y un true para iniciarlo
-            MenuCuenta menuCuenta = new MenuCuenta(cuentaEncontrada, true);
-            menuCuenta.interfazCuenta();
+            ControladorMenuCuenta controladorMenuCuenta = new ControladorMenuCuenta(cuentaEncontrada, true);
+            controladorMenuCuenta.interfazCuenta();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -154,7 +154,7 @@ public class MenuApp {
         String tipo = scanner.nextLine();
 
         try {
-            controladorCuenta.actualizarCuenta(numCuenta, nombreProp, tipo);
+            serviciosCuenta.actualizarCuenta(numCuenta, nombreProp, tipo);
             // Mostramos un mensaje que nos informe el exito del proceso
             System.out.println("Datos actualizados");
         } catch (CampoVacioException e) {
@@ -171,7 +171,7 @@ public class MenuApp {
         int numCuenta = scanner.nextInt();
         try{
             // Ahora solo pasamos el numero de cuenta al controlador
-            controladorCuenta.eliminarCuenta(numCuenta);
+            serviciosCuenta.eliminarCuenta(numCuenta);
             // Mostramos un mensaje que nos informe el exito del proceso
             System.out.println("Cuenta eliminada");
         } catch (Exception e) {
