@@ -21,13 +21,14 @@ public class BancoBaseDatos implements Banco {
         try(Connection conexion = DriverManager.getConnection(db.getCadenaConexion())){
             Cuenta cuenta = (Cuenta) objeto;
             // Creamos un String de la sentencia SQL para insertar los datos en la tabla
-            String sql = "INSERT INTO cuentas (numero_cuenta, nombre_propietario, saldo, tipo, cantidad_retiro, cantidad_deposito) " +
+            String sql = "INSERT INTO cuentas (numero_cuenta, nombre_propietario, saldo, tipo, cantidad_retiro, cantidad_deposito, cantidad_transferencia) " +
                     "VALUES(" + cuenta.getNumero_cuenta() + ", " +
                     "'" + cuenta.getNombre_propietario() + "', " +
                     "" + cuenta.getSaldo() + ", " +
                     "'" + cuenta.getTipo() + "', " +
                     "" + cuenta.getCantidad_retiro() + ", " +
-                    "" + cuenta.getCantidad_deposito() + ");";
+                    "" + cuenta.getCantidad_deposito() + ", " +
+                    "" + cuenta.getCantidad_transferencia() + ");";
             // Preparamos el Statement para poder ejecutar la sentencia SQL
             Statement sentencia = conexion.createStatement();
             sentencia.execute(sql);
@@ -99,9 +100,10 @@ public class BancoBaseDatos implements Banco {
                     String tipo = resultadoConsulta.getString("tipo");
                     int cantRetiros = resultadoConsulta.getInt("cantidad_retiro");
                     int cantDepositos = resultadoConsulta.getInt("cantidad_deposito");
+                    int cantTransferencia = resultadoConsulta.getInt("cantidad_transferencia");
 
                     // Luego, pasamos los datos del registro en el objeto que creamos de cuenta
-                    cuenta = new Cuenta(numCuenta, nomPropietario, saldo, tipo, cantRetiros, cantDepositos);
+                    cuenta = new Cuenta(numCuenta, nomPropietario, saldo, tipo, cantRetiros, cantDepositos, cantTransferencia);
                     // Agregamos el registro a la lista
                     cuentas.add(cuenta);
                 }
@@ -136,9 +138,10 @@ public class BancoBaseDatos implements Banco {
                 String tipo = resultadoConsulta.getString("tipo");
                 int cantRetiros = resultadoConsulta.getInt("cantidad_retiro");
                 int cantDepositos = resultadoConsulta.getInt("cantidad_deposito");
+                int cantTransferencia = resultadoConsulta.getInt("cantidad_transferencia");
 
                 // Luego, pasamos los datos del registro en el objeto que creamos de cuenta
-                cuenta = new Cuenta(numCuenta, nomPropietario, saldo, tipo, cantRetiros, cantDepositos);
+                cuenta = new Cuenta(numCuenta, nomPropietario, saldo, tipo, cantRetiros, cantDepositos, cantTransferencia);
                 // Retornamos el objeto
                 return cuenta;
             }

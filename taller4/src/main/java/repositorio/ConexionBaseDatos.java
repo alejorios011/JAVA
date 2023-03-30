@@ -25,14 +25,15 @@ public class ConexionBaseDatos {
         // automáticamente cuando termine el bloque de código
         try(Connection conexion = DriverManager.getConnection(cadenaConexion)){
             // Creamos un String con el SQL para la tabla
-            String sql = "CREATE TABLE IF NOT EXISTS cuentas (\n" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, \n" +
-                    "numero_cuenta INTEGER NOT NULL UNIQUE, \n" +
-                    "nombre_propietario TEXT NOT NULL, \n" +
-                    "saldo REAL, \n" +
-                    "tipo TEXT NOT NULL, \n" +
-                    "cantidad_retiro INTEGER NOT NULL, \n" +
-                    "cantidad_deposito INTEGER NOT NULL\n" +
+            String sql = "CREATE TABLE IF NOT EXISTS cuentas (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "numero_cuenta INTEGER NOT NULL UNIQUE, " +
+                    "nombre_propietario TEXT NOT NULL, " +
+                    "saldo REAL, " +
+                    "tipo TEXT NOT NULL, " +
+                    "cantidad_retiro INTEGER NOT NULL, " +
+                    "cantidad_deposito INTEGER NOT NULL, " +
+                    "cantidad_transferencia INTEGER NOT NULL" +
                     ");";
             // Se crea la sentencia para ejecutar el SQL
             Statement sentencia = conexion.createStatement();

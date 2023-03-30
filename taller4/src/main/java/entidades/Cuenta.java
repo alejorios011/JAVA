@@ -7,15 +7,19 @@ public class Cuenta {
     private String tipo;
     private int cantidad_retiro;
     private int cantidad_deposito;
+    private int cantidad_transferencia;
 
     // Constructor
-    public Cuenta(int numero_cuenta, String nombre_propietario, double saldo, String tipo, int cantidad_retiro, int cantidad_deposito) {
+
+
+    public Cuenta(int numero_cuenta, String nombre_propietario, double saldo, String tipo, int cantidad_retiro, int cantidad_deposito, int cantidad_transferencia) {
         this.numero_cuenta = numero_cuenta;
         this.nombre_propietario = nombre_propietario;
         this.saldo = saldo;
         this.tipo = tipo;
         this.cantidad_retiro = cantidad_retiro;
         this.cantidad_deposito = cantidad_deposito;
+        this.cantidad_transferencia = cantidad_transferencia;
     }
 
     // Getters y Setters
@@ -65,5 +69,13 @@ public class Cuenta {
 
     public void setCantidad_deposito(int cantidad_deposito) {
         this.cantidad_deposito = cantidad_deposito;
+    }
+
+    public int getCantidad_transferencia() {
+        return cantidad_transferencia;
+    }
+
+    public void setCantidad_transferencia(int cantidad_transferencia) {
+        this.cantidad_transferencia = cantidad_transferencia;
     }
 }

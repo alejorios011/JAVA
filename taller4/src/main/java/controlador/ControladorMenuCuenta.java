@@ -46,6 +46,7 @@ public class ControladorMenuCuenta {
                 depositar();
                 break;
             case 3:
+                transferir();
                 break;
             case 4:
                 verDatos();
@@ -59,7 +60,7 @@ public class ControladorMenuCuenta {
     public void retirar(){
         System.out.println("RETIRAR SALDO");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el valor a retirar");
+        System.out.println("Ingrese el valor a retirar: ");
         double retiro = scanner.nextDouble();
         try {
             serviciosCuenta.retirar(retiro, cuentaUsuario);
@@ -70,14 +71,26 @@ public class ControladorMenuCuenta {
 
     public void depositar(){
         System.out.println("DEPOSITAR SALDO");
-        // Solicitamos el valor del deposito por teclado
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el monto del deposito");
+        System.out.println("Ingrese el monto del deposito: ");
         double deposito = scanner.nextDouble();
-        // Llamamos el método para hacer el deposito
         try {
             serviciosCuenta.depositar(deposito, cuentaUsuario);
         } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void transferir(){
+        System.out.println("TRANSFERIR SALDO");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el numero de la cuenta a la que se va a hacer la transferencia: ");
+        int numTransaccion = scanner.nextInt();
+        System.out.println("Ingrese el valor a transferir: ");
+        double transferencia = scanner.nextDouble();
+        try {
+            serviciosCuenta.transferir(numTransaccion, transferencia, cuentaUsuario);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

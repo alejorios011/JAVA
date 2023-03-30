@@ -6,5 +6,5 @@ public interface Movimientos {
 
     public void retirar(double monto, Object objeto) throws Exception;
 
-    public void transaccion(double monto, Object objeto);
+    public void transferir(int numTransaccion, double monto, Object objeto) throws Exception;
 }

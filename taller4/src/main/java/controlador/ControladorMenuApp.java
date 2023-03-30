@@ -82,9 +82,10 @@ public class ControladorMenuApp {
         // las inicializamos en 0, por ser una cuenta nueva
         int cantRetiros = 0;
         int cantDepositos = 0;
+        int cantTransferencia = 0;
 
         // Creamos un objeto Movimientos y le pasamos en el contructor los datos que recibimos
-        Cuenta nuevaCuenta = new Cuenta(numCuenta, nomPropietario, saldo, tipo, cantRetiros, cantDepositos);
+        Cuenta nuevaCuenta = new Cuenta(numCuenta, nomPropietario, saldo, tipo, cantRetiros, cantDepositos, cantTransferencia);
         // Pasamos la nueva cuenta al controlador
         try{
             serviciosCuenta.crearCuenta(nuevaCuenta);

@@ -10,12 +10,12 @@ import java.util.List;
 public class ServiciosCuenta {
     // Agregamos como atributo la clase que tiene la conexion a la base de datos
     private BancoBaseDatos bancoBaseDatos;
-    private MovimientosBaseDatos cuentaBaseDatos;
+    private MovimientosBaseDatos movimientosBaseDatos;
 
     public ServiciosCuenta() {
         // La inicializamos en el contructor
         bancoBaseDatos = new BancoBaseDatos();
-        cuentaBaseDatos = new MovimientosBaseDatos();
+        movimientosBaseDatos = new MovimientosBaseDatos();
     }
 
     public void crearCuenta(Cuenta cuentaNueva) throws Exception {
@@ -56,7 +56,7 @@ public class ServiciosCuenta {
     public void depositar(double monto, Object objeto) throws Exception {
         // Solicitemos que el valor del deposito sea mayor a 10000
         if (monto > 10000) {
-            cuentaBaseDatos.depositar(monto, objeto);
+            movimientosBaseDatos.depositar(monto, objeto);
         } else {
             throw new Exception("El valor minimo del deposito es de 10000");
         }
@@ -65,9 +65,18 @@ public class ServiciosCuenta {
     public void retirar(double monto, Object objeto) throws Exception {
         // Solicitemos que el valor del retiro sea mayor a 10000
         if (monto > 10000){
-            cuentaBaseDatos.retirar(monto, objeto);
+            movimientosBaseDatos.retirar(monto, objeto);
         } else {
             throw new Exception("El valor minimo de retiro es de 10000");
+        }
+    }
+
+    public void transferir(int numTransaccion, double monto, Object objeto) throws Exception {
+        // Solicitemos que el valor de la transferencia sea mayor a 5000
+        if (monto > 5000){
+            movimientosBaseDatos.transferir(numTransaccion, monto, objeto);
+        } else {
+            throw new Exception("El valor minimo a transferir es de 5000");
         }
     }
 }
