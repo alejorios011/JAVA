@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ControladorMenuCuenta {
     private boolean iniciar = false;
-    // Crearemos un atributo de tipo Cuenta, para guardar los datos que nos envien ahí
+    // Crearemos un atributo de tipo Movimientos, para guardar los datos que nos envien ahí
     Cuenta cuentaUsuario;
     private ServiciosCuenta serviciosCuenta;
     // private ControladorMenuApp menuApp;

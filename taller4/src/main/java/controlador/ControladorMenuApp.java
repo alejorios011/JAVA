@@ -62,6 +62,7 @@ public class ControladorMenuApp {
     }
 
     private void crearCuenta(){
+        System.out.println("CREAR CUENTA");
         // Solicitamos por consola los datos para abrir la cuenta
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese el número de cuenta");
@@ -82,7 +83,7 @@ public class ControladorMenuApp {
         int cantRetiros = 0;
         int cantDepositos = 0;
 
-        // Creamos un objeto Cuenta y le pasamos en el contructor los datos que recibimos
+        // Creamos un objeto Movimientos y le pasamos en el contructor los datos que recibimos
         Cuenta nuevaCuenta = new Cuenta(numCuenta, nomPropietario, saldo, tipo, cantRetiros, cantDepositos);
         // Pasamos la nueva cuenta al controlador
         try{
@@ -95,7 +96,7 @@ public class ControladorMenuApp {
     }
 
     private void listarCuentas(){
-        System.out.println("Listando cuentas...");
+        System.out.println("LISTAR CUENTAS...");
         List<Cuenta> cuentasBaseDatos = serviciosCuenta.listarCuentas();
 
         for (Cuenta cuentaBD : cuentasBaseDatos) {
@@ -109,7 +110,7 @@ public class ControladorMenuApp {
     }
 
     private void buscarCuenta(){
-        System.out.println("Buscar Cuenta");
+        System.out.println("BUSCAR CUENTA");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Por favor ingrese el numero de cuenta:");
         int numCuenta = scanner.nextInt();
@@ -142,7 +143,7 @@ public class ControladorMenuApp {
     }
 
     private void actualizarCuenta(){
-        System.out.println("Actualizando cuenta");
+        System.out.println("ACTUALIZAR CUENTA");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Por favor ingrese el numero de la cuenta");
         int numCuenta = scanner.nextInt();
@@ -165,7 +166,7 @@ public class ControladorMenuApp {
     }
 
     private void eliminarCuenta(){
-        System.out.println("Eliminar Cuenta");
+        System.out.println("ELIMINAR CUENTA");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Por favor ingrese el numero de cuenta que desea eliminar");
         int numCuenta = scanner.nextInt();
@@ -173,7 +174,7 @@ public class ControladorMenuApp {
             // Ahora solo pasamos el numero de cuenta al controlador
             serviciosCuenta.eliminarCuenta(numCuenta);
             // Mostramos un mensaje que nos informe el exito del proceso
-            System.out.println("Cuenta eliminada");
+            System.out.println("Movimientos eliminada");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
