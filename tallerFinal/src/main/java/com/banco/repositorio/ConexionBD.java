@@ -45,7 +45,7 @@ public class ConexionBD {
                     "SALDO REAL NOT NULL,\n" +
                     "TIPO_CUENTA TEXT NOT NULL,\n" +
                     "ID_USUARIO INTEGER NOT NULL,\n" +
-                    "FOREIGN KEY(ID_USUARIO) REFERENCES USUARIO(ID)\n" +
+                    "FOREIGN KEY(ID_USUARIO) REFERENCES USUARIOS(ID)\n" +
                     ");\n";
 
             Statement sentencia = conexion.createStatement();

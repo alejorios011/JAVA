@@ -84,7 +84,6 @@ public class UsuarioRepository implements Repositorio {
         return null;
     }
 
-    @Override
     public Object buscar(String idConsulta) {
         try(Connection conexion = DriverManager.getConnection(conexionBD.getCadenaConexion())){
             String sql = "SELECT * FROM USUARIOS WHERE ID=" + idConsulta + ";";

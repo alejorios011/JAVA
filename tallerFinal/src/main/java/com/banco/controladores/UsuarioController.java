@@ -42,7 +42,7 @@ public class UsuarioController extends HttpServlet {
                         response.setContentType("application/json");
                         response.getWriter().println(json);
                     } catch (Exception e){
-                        response.setStatus(404);
+                        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                         Map<String, String> error = new HashMap<>();
                         error.put("Error", e.getMessage());
                         String json = mapper.writeValueAsString(error);
@@ -51,7 +51,7 @@ public class UsuarioController extends HttpServlet {
                     }
                     break;
                 default:
-                    response.setStatus(404);
+                    response.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     Map<String, String> error = new HashMap<>();
                     error.put("error", "No se encontro el usuario");
                     String json = mapper.writeValueAsString(error);
