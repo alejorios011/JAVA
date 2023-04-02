@@ -41,6 +41,16 @@ public class CuentaRepository implements Repositorio {
         }
     }
 
+    public void eliminarPorUsuario(String idUsuario){
+        try(Connection conexion = DriverManager.getConnection(conexionBD.getCadenaConexion())){
+            String sql = "DELETE FROM CUENTAS WHERE ID_USUARIO = " + idUsuario + ";";
+            Statement sentencia = conexion.createStatement();
+            sentencia.execute(sql);
+        } catch (SQLException e){
+            System.out.println("Error de conexion: " + e.getMessage());
+        }
+    }
+
     // Este no se solicita en el taller pero lo dejare como extra, no se modificara el saldo, solo los demas datos
     @Override
     public void actualizar(Object objeto) {
@@ -86,7 +96,7 @@ public class CuentaRepository implements Repositorio {
     }
 
     // Para listar por Id
-    public List<?> listarPorId(String idConsulta){
+    public List<?> listarPorUsuario(String idConsulta){
         List<Cuenta> cuentas = new ArrayList<Cuenta>();
         try(Connection conexion = DriverManager.getConnection(conexionBD.getCadenaConexion())){
             String sql = "SELECT * FROM CUENTAS WHERE ID_USUARIO = " + idConsulta + ";";
@@ -117,6 +127,28 @@ public class CuentaRepository implements Repositorio {
     public Object buscar(String idConsulta) {
         try(Connection conexion = DriverManager.getConnection(conexionBD.getCadenaConexion())){
             String sql = "SELECT * FROM CUENTAS WHERE ID = " + idConsulta + ";";
+            PreparedStatement sentencia = conexion.prepareStatement(sql);
+            ResultSet resultadoConsulta = sentencia.executeQuery();
+
+            if (resultadoConsulta != null && resultadoConsulta.next()){
+                int id = resultadoConsulta.getInt("ID");
+                String numeroCuenta = resultadoConsulta.getString("NUMERO_CUENTA");
+                double saldo = resultadoConsulta.getDouble("SALDO");
+                String tipoCuenta = resultadoConsulta.getString("TIPO_CUENTA");
+                int idUsuario = resultadoConsulta.getInt("ID_USUARIO");
+
+                Cuenta cuenta = new Cuenta(id, numeroCuenta, saldo, tipoCuenta, idUsuario);
+                return cuenta;
+            }
+        } catch (SQLException e){
+            System.out.println("Error de conexion: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public Object buscarPorCuenta(String idConsulta) {
+        try(Connection conexion = DriverManager.getConnection(conexionBD.getCadenaConexion())){
+            String sql = "SELECT * FROM CUENTAS WHERE ID_USUARIO = " + idConsulta + ";";
             PreparedStatement sentencia = conexion.prepareStatement(sql);
             ResultSet resultadoConsulta = sentencia.executeQuery();
 

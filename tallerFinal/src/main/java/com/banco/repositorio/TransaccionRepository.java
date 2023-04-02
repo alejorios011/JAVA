@@ -209,6 +209,16 @@ public class TransaccionRepository implements Repositorio {
         }
     }
 
+    public void eliminarPorCuenta(String idCuenta) {
+        try(Connection conexion = DriverManager.getConnection(conexionBD.getCadenaConexion())){
+            String sql = "DELETE FROM TRANSACCIONES WHERE ID_CUENTA = " + idCuenta + ";";
+            Statement sentencia = conexion.createStatement();
+            sentencia.execute(sql);
+        } catch (SQLException e){
+            System.out.println("Error de conexion: " + e.getMessage());
+        }
+    }
+
     @Override
     public void actualizar(Object objeto) {
         // No se va a implementar debido a que no se solicita en el ejercicio y tampoco debería permitirse modificar una transacción

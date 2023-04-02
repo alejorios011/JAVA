@@ -39,7 +39,7 @@ public class CuentaController extends HttpServlet {
                 case "/listar":
                     try {
                         String id = req.getParameter("id");
-                        List<Cuenta> cuentas = (List<Cuenta>) cuentaService.listarPorId(id);
+                        List<Cuenta> cuentas = (List<Cuenta>) cuentaService.listarPorUsuario(id);
                         String json = mapper.writeValueAsString(cuentas);
                         resp.setContentType("application/json");
                         resp.getWriter().println(json);

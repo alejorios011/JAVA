@@ -46,8 +46,8 @@ public class CuentaService implements Servicio {
         return (List<Cuenta>) cuentaRepository.listar();
     }
 
-    public List<?> listarPorId(String id){
-        return (List<Cuenta>) cuentaRepository.listarPorId(id);
+    public List<?> listarPorUsuario(String id){
+        return (List<Cuenta>) cuentaRepository.listarPorUsuario(id);
     }
 
     public Object buscar(String id) throws Exception {
