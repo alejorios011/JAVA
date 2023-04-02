@@ -50,8 +50,8 @@ public class CuentaService implements Servicio {
         return (List<Cuenta>) cuentaRepository.listarPorId(id);
     }
 
-    public Object buscar(String numeroCuenta) throws Exception {
-        Object cuenta = cuentaRepository.buscar(numeroCuenta);
+    public Object buscar(String id) throws Exception {
+        Object cuenta = cuentaRepository.buscar(id);
         if (cuenta != null){
             return (Cuenta) cuenta;
         } else {

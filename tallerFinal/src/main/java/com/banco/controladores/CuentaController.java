@@ -37,8 +37,8 @@ public class CuentaController extends HttpServlet {
             switch (path){
                 // Esta es la función solicitada en el taller, lista las cuentas de un usuario en especifico por Id
                 case "/listar":
-                    String id = req.getParameter("id");
                     try {
+                        String id = req.getParameter("id");
                         List<Cuenta> cuentas = (List<Cuenta>) cuentaService.listarPorId(id);
                         String json = mapper.writeValueAsString(cuentas);
                         resp.setContentType("application/json");
@@ -54,9 +54,9 @@ public class CuentaController extends HttpServlet {
                     break;
                 // Sirve para buscar una única cuenta en especifico
                 case "/buscar":
-                    String numeroCuenta = req.getParameter("numeroCuenta");
                     try {
-                        Cuenta cuenta = (Cuenta) cuentaService.buscar(numeroCuenta);
+                        String id = req.getParameter("id");
+                        Cuenta cuenta = (Cuenta) cuentaService.buscar(id);
                         String json = mapper.writeValueAsString(cuenta);
                         resp.setContentType("application/json");
                         resp.getWriter().println(json);
@@ -72,7 +72,7 @@ public class CuentaController extends HttpServlet {
                 default:
                     resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
                     Map<String, String> error = new HashMap<>();
-                    error.put("error", "No se encontro el usuario");
+                    error.put("error", "No se encontro la cuenta");
                     String json = mapper.writeValueAsString(error);
                     resp.setContentType("application/json");
                     resp.getWriter().println(json);

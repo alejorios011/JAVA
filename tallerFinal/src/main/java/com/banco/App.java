@@ -1,6 +1,7 @@
 package com.banco;
 
 import com.banco.controladores.CuentaController;
+import com.banco.controladores.TransaccionController;
 import com.banco.controladores.UsuarioController;
 import com.banco.repositorio.ConexionBD;
 import org.eclipse.jetty.server.Server;
@@ -17,6 +18,7 @@ public class App {
         context.setContextPath("/");
         context.addServlet(UsuarioController.class, "/usuario/*");
         context.addServlet(CuentaController.class, "/cuenta/*");
+        context.addServlet(TransaccionController.class, "/transacciones/*");
 
         server.setHandler(context);
 

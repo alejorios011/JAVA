@@ -114,9 +114,9 @@ public class CuentaRepository implements Repositorio {
 
     // Este lo usaremos para verificar los datos de una única cuenta
     @Override
-    public Object buscar(String numCuentaConsulta) {
+    public Object buscar(String idConsulta) {
         try(Connection conexion = DriverManager.getConnection(conexionBD.getCadenaConexion())){
-            String sql = "SELECT * FROM CUENTAS WHERE NUMERO_CUENTA = " + numCuentaConsulta + ";";
+            String sql = "SELECT * FROM CUENTAS WHERE ID = " + idConsulta + ";";
             PreparedStatement sentencia = conexion.prepareStatement(sql);
             ResultSet resultadoConsulta = sentencia.executeQuery();
 
